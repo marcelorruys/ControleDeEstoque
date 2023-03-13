@@ -1,4 +1,6 @@
 using ControleEstoque.Context;
+using ControleEstoque.Repositories.Interfaces;
+using ControleEstoque.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +13,9 @@ string mySqlConnection =
 builder.Services.AddDbContextPool<AppDbContext>(options =>
                 options.UseMySql(mySqlConnection,
                       ServerVersion.AutoDetect(mySqlConnection)));
+
+builder.Services.AddTransient<IProdutoRepository, ProdutoRepository>();
+builder.Services.AddTransient<ICategoriaRepository, CategoriaRepository>();
 
 builder.Services.AddControllersWithViews();
 

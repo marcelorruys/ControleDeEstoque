@@ -1,0 +1,15 @@
+﻿@model ControleEstoque.ViewModels.ProdutoListViewModel
+
+
+<div>
+    <h2>@Model.CategoriaAtual</h2>
+</div>
+
+<div class="container">
+    <div class="row">
+        @foreach (var produto in Model.Produtos)
+        {
+                <partial name="_ProdutosResumo" for="@produto" />
+        }
+    </div>
+</div>
