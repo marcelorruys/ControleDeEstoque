@@ -5,9 +5,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddDbContext<AppDbContext>
-                   (options => options.UseMySql("server=localhost;database=ControleEstoqueDb;uid=root;pwd=Marcelo@SQL",
-                   Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.28-mysql")));
+string mySqlConnection =
+              builder.Configuration.GetConnectionString("DefaultConnection");
+
+builder.Services.AddDbContextPool<AppDbContext>(options =>
+                options.UseMySql(mySqlConnection,
+                      ServerVersion.AutoDetect(mySqlConnection)));
 
 builder.Services.AddControllersWithViews();
 
