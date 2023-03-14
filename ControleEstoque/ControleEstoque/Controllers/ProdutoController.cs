@@ -40,6 +40,8 @@ namespace ControleEstoque.Controllers
                 CategoriaAtual = categoriaAtual
             };
 
+            ViewData["Data"] = DateTime.Now;
+
             return View(produtosListViewModel);
         }
 

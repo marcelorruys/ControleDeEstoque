@@ -1,71 +1,942 @@
 ﻿@model IEnumerable<ControleEstoque.Models.Produto>
 
+<style>
+    /* Tabela */
+
+    .local {
+        margin-left: 12.5%;
+        margin-right: 12.5%;
+    }
+
+    th,
+    td {
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        text-align: left;
+        height: 35px;
+    }
+
+    td {
+        height: 35px;
+    }
+
+    .tr1th0 {
+        width: 280px;
+    }
+
+    .tr1th1 {
+        width: 250px;
+    }
+
+    .tr1th2 {
+        width: 250px;
+    }
+
+    .tr1th3 {
+        width: 250px;
+    }
+
+    .tr1th4 {
+        width: 250px;
+    }
+
+    .tr1th5 {
+        width: 250px;
+    }
+
+    .tr1th6 {
+        width: 250px;
+    }
+
+    .tr1th7 {
+        width: 250px;
+    }
+
+    .Codigo {
+        width: 180px;
+    }
+
+    .Exem {
+        width: 100px;
+    }
+
+    .estrela {
+        margin-left: 10%;
+    }
+
+    /* Botão de Edição */
+
+    .editButton {
+        background-color: #04AA6D;
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        text-decoration: none;
+    }
+
+        .editButton:active {
+            background-color: #4fae8b;
+            text-decoration: none;
+            background: white;
+            color: #fff;
+        }
+
+    /* Estrela de Favorito */
+    .star {
+        visibility: hidden;
+        font-size: 20px;
+        cursor: pointer;
+        height: 25px;
+        width: -200px;
+    }
+
+        .star:before {
+            content: "\2605";
+            visibility: visible;
+        }
+
+        .star:checked:before {
+            content: "\2606";
+        }
+
+    .busca {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 15px;
+        line-height: 1.5;
+        color: black;
+        display: block;
+        width: 100px;
+        background: whitesmoke;
+        height: 0vh;
+        border-radius: 1.5vh;
+        padding: 0 0px 0 10px;
+        position: fixed;
+        right: 7%;
+        margin-bottom: 0vh;
+    }
+
+
+    .lupa {
+        left: 92.55%;
+        top: -91%;
+        position: relative;
+        background-color: #333;
+        cursor: pointer;
+        margin-right: 5%;
+        padding-left: 1vh;
+        padding-top: 0.3%;
+        padding-bottom: 0.4%;
+        width: 30px;
+    }
+
+    .lupa1 {
+        width: 20px;
+    }
+
+    .split {
+        width: 500px;
+    }
+
+    .lixo {
+        cursor: pointer;
+        outline: revert;
+        margin-left: 15px;
+    }
+
+    .CorBotao {
+        color: white;
+        text-decoration: none;
+    }
+
+    /*   começo do Pop-Up   */
+    body {
+        font-size: 17px;
+    }
+
+    /* fundo da caixa */
+    .modal {
+        display: none;
+        /* ficar escondida por padrão */
+        position: fixed;
+        /* ficar fixa */
+        left: 0;
+        top: 0;
+        width: 100%;
+        /* largura inteira */
+        height: 150%;
+        /* altura inteira */
+        overflow: auto;
+        /* habilitar scroll se precisar */
+        background-color: rgba(0, 0, 0, 0.4);
+        /* fundo */
+    }
+
+    /* conteudo da caixa */
+    .modal-content {
+        border: solid 2px green;
+        background-color: #fefefe;
+        position: absolute;
+        left: 50%;
+        top: 33%;
+        transform: translate(-50%, -50%);
+        padding: 3%;
+        width: 65%;
+        height: 55%;
+        overflow-y: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* botão de fechar */
+    .botaoFechar {
+        color: #aaa;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+        .botaoFechar:hover,
+        .botaoFechar:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+    /* estilo do botão */
+    button {
+        background-color: #04AA6D;
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        text-decoration: none;
+    }
+
+        button:hover {
+            background-color: #04AA6D;
+            color: white;
+        }
+
+    ul {
+        list-style: none;
+    }
+
+    .lista-em-duas-colunas {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+        .lista-em-duas-colunas > div {
+            width: calc(50% - 10px);
+            margin-bottom: 0px;
+            display: inline-block
+        }
+
+            .lista-em-duas-colunas > div > label {
+                display: block;
+                margin-bottom: 0px;
+            }
+
+            .lista-em-duas-colunas > div > input {
+                width: 100%;
+            }
+
+    #btnCancelar {
+        cursor: pointer;
+        position: absolute;
+        bottom: 10px;
+        right: 100px;
+        margin-bottom: 0px;
+    }
+
+    #btnSalvar {
+        cursor: pointer;
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+    }
+
+    /* CSS  do Pop-Up */
+
+    /* botao de Editar */
+
+    .EditarBotao {
+        position: relative;
+        top: -23%;
+        background-color: #04AA6D;
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        text-decoration: none;
+        padding: 0.2vh 6vh 0.3vh 5%;
+        right: 74%;
+        left: 45%;
+        overflow-x: hidden;
+        font-family: Arial, Helvetica, sans-serif;
+        overflow-x: hidden;
+        width: 5vh;
+    }
+
+        .EditarBotao:active {
+            background-color: #4fae8b;
+            text-decoration: none;
+            background: white;
+            color: #fff;
+        }
+
+    /* botao de voltar */
+
+    .VoltarBotao {
+        position: relative;
+        top: -26%;
+        left: 0%;
+        right: 55%;
+        background-color: #04AA6D;
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        text-decoration: none;
+        padding: 0.3vh 4vh 0.3vh 10%;
+        overflow-x: hidden;
+        overflow-x: hidden;
+        overflow-x: hidden;
+        width: 5vh;
+    }
+
+        .VoltarBotao:active {
+            background-color: #4fae8b;
+            text-decoration: none;
+            background: white;
+            color: #fff;
+        }
+
+    .borda {
+        position: relative;
+        border-top: solid 3px;
+        border-left: solid 3px;
+        border-right: solid 3px;
+        border-bottom: solid 3px;
+        border-color: #333;
+        background-color: rgba(255, 255, 255, 0.966);
+        border-radius: 10px;
+        top: -3.5%;
+        bottom: -0%;
+        left: 0%;
+        margin-top: 10vh;
+        padding: 0% 80% 5% 80%;
+        right: 10%;
+        margin-left: -20%;
+        width: 90%;
+    }
+
+    /* Imagem */
+
+    .Img {
+        position: absolute;
+        top: 10VH;
+        left: 3vh;
+        overflow-x: hidden;
+    }
+
+    .Prod2 {
+        width: 400px;
+    }
+
+    /* barra do meio */
+
+    .meio2 {
+        border-left: 3px solid black;
+        left: 45%;
+        position: absolute;
+        top: 10vh;
+        height: 70%;
+    }
+
+
+
+    /* Posição do Nome*/
+    .NomeItem {
+        top: 0vh;
+        left: 85%;
+        bottom: 3%;
+        position: relative;
+    }
+
+    /* Posição do codigo */
+
+    .codigo {
+        position: relative;
+        top: 3vh;
+        left: 52%;
+        bottom: -2%;
+    }
+
+
+    .CodItem {
+        top: -1.2vh;
+        left: 71%;
+        bottom: 2%;
+        position: relative;
+    }
+
+    /* Posição do Estoque*/
+
+    .Estoque {
+        top: 1.5vh;
+        left: 52%;
+        bottom: 2%;
+        position: relative;
+    }
+
+    .EstoqueItem {
+        top: -2.7vh;
+        left: 73%;
+        bottom: 2%;
+        position: relative;
+    }
+
+    /* Posição do Sessao*/
+    .Sessao {
+        top: 0vh;
+        left: 52%;
+        bottom: 2%;
+        position: relative;
+    }
+
+    .SessaoItem {
+        top: -4.2vh;
+        left: 71%;
+        bottom: 2%;
+        position: relative;
+    }
+
+    /* Posição do Valor */
+
+    .Valor {
+        top: -1vh;
+        left: 52%;
+        bottom: 2%;
+        position: relative;
+    }
+
+    .ValorItem {
+        top: -5.4vh;
+        left: 69%;
+        bottom: 2%;
+        position: relative;
+    }
+
+    /* Posição do Origem */
+
+
+    .Origem {
+        top: -3vh;
+        left: 52%;
+        margin-bottom: 2%;
+        position: relative;
+    }
+
+    .OrigemItem {
+        top: -7.3vh;
+        left: 74%;
+        bottom: 2%;
+        position: relative;
+    }
+
+    /* Posição do Marca*/
+
+    .Marca {
+        position: relative;
+        top: -4vh;
+        left: 52%;
+        bottom: 2%;
+    }
+
+    .MarcaItem {
+        top: -8.3vh;
+        left: 71%;
+        bottom: 2%;
+        position: relative;
+    }
+
+    /* Posição do Descriçãos*/
+
+    .Descri {
+        top: -5vh;
+        left: 52%;
+        bottom: 2%;
+        position: relative;
+    }
+
+
+    .DescriItem {
+        top: -5vh;
+        left: 53%;
+        bottom: 2%;
+        position: relative;
+        margin-right: 0%;
+    }
+
+
+
+
+    .lupa1 {
+        width: 20px;
+    }
+
+    .lupa {
+        left: 92.4%;
+        top: -90%;
+    }
+
+    .modal {
+        width: 110%;
+        top: -1.3%;
+    }
+
+    .Prod2 {
+        width: 350px;
+        height: 60%;
+        left: 40vh;
+    }
+
+    .Img {
+        left: 4vh;
+    }
+
+    }
+    /*------------------------------------------------------------------ */
+
+
+
+
+
+
+    .lupa1 {
+        width: 20px;
+    }
+
+    .lupa {
+        left: 92.3%;
+        top: -89%;
+    }
+
+    /*------------------------------------------------------------------ */
+
+    .modal {
+        width: 100%;
+        top: -1.3%;
+    }
+
+    .Prod2 {
+        width: 350px;
+        height: 150%;
+    }
+
+    .Img {
+        left: 0vh;
+    }
+    /*------------------------------------------------------------------ */
+
+    .modal-content {
+        left: 55%;
+        width: 65%;
+        height: 55%;
+    }
+
+    /*------------------------------------------------------------------ */
+
+    .borda {
+        padding: 0% 45% 5% 70%;
+        margin-left: 0.5%;
+    }
+
+    .VoltarBotao {
+        left: 7.5%;
+    }
+
+    .EditarBotao {
+        top: -23%;
+    }
+    /*------------------------------------------------------------------ */
+
+    /* Posição do Nome*/
+    .NomeItem {
+        left: 65%;
+    }
+
+    /* Posição do codigo */
+
+    .codigo {
+        left: 42%;
+    }
+
+    .CodItem {
+        left: 65%;
+    }
+
+    /* Posição do Estoque*/
+
+    .Estoque {
+        left: 42%;
+    }
+
+    .EstoqueItem {
+        left: 65%;
+    }
+
+    /* Posição do Sessao*/
+    .Sessao {
+        left: 42%;
+    }
+
+    .SessaoItem {
+        left: 65%;
+    }
+
+
+    /* Posição do Valor */
+
+    .Valor {
+        left: 42%;
+    }
+
+    .ValorItem {
+        left: 65%;
+    }
+
+    /* Posição do Origem */
+
+
+    .Origem {
+        left: 42%;
+    }
+
+    .OrigemItem {
+        left: 65%;
+    }
+
+    /* Posição do Marca*/
+
+    .Marca {
+        left: 42%;
+    }
+
+    .MarcaItem {
+        left: 65%;
+    }
+
+    /* Posição do Descriçãos*/
+
+    .Descri {
+        left: 42%;
+    }
+
+
+    .DescriItem {
+        left: 45%;
+    }
+
+
+    .Img {
+        width: 85%;
+    }
+
+
+    .lupa1 {
+        width: 20px;
+    }
+
+    .lupa {
+        left: 92.2%;
+        top: -86%;
+    }
+    /*------------------------------------------------------------------ */
+
+    .modal {
+        width: 100%;
+        top: -1.3%;
+    }
+
+    .Prod2 {
+        width: 300px;
+        height: 60%;
+    }
+    /*------------------------------------------------------------------ */
+
+    /* Posição do Nome*/
+
+    /* Posição do codigo */
+
+
+
+    .CodItem {
+        left: 68%;
+    }
+
+    /* Posição do Estoque*/
+
+
+
+    .EstoqueItem {
+        left: 70%;
+    }
+
+    /* Posição do Sessao*/
+
+
+    .SessaoItem {
+        left: 68%;
+    }
+
+
+    /* Posição do Valor */
+
+
+
+    .ValorItem {
+        left: 68%;
+    }
+
+    /* Posição do Origem */
+
+
+
+    .OrigemItem {
+        left: 68%;
+    }
+
+    /* Posição do Marca*/
+
+
+
+    .MarcaItem {
+        left: 68%;
+    }
+
+    /* Posição do Descriçãos*/
+
+
+
+    .DescriItem {
+        left: 45%;
+    }
+
+
+    .split {
+        width: 300px;
+    }
+    /*------------------------------------------------------------------ */
+
+    .lupa1 {
+        width: 20px;
+    }
+
+    .lupa {
+        left: 92.1%;
+        top: -84%;
+    }
+    /*------------------------------------------------------------------ */
+
+    .modal {
+        width: 100%;
+        top: -1.3%;
+    }
+
+    .Prod2 {
+        width: 200px;
+        height: 300px;
+    }
+
+    .Img {
+        left: 6%;
+        top: 20%;
+    }
+    /*------------------------------------------------------------------ */
+
+    .VoltarBotao {
+        left: 15%;
+        padding: 2% 1vh 3% 5px;
+        text-align: center;
+        width: 5vh;
+    }
+
+    .EditarBotao {
+        top: -22.5%;
+        padding: 2% 25px 3% 0px;
+        text-align: center;
+        width: 5vh;
+    }
+
+    /*------------------------------------------------------------------ */
+
+    /* Posição do Nome*/
+    .NomeItem {
+        left: 45%;
+    }
+
+    /* Posição do codigo */
+
+
+
+    .CodItem {
+        left: 75%;
+    }
+
+    /* Posição do Estoque*/
+
+
+
+    .EstoqueItem {
+        left: 79%;
+    }
+
+    /* Posição do Sessao*/
+
+
+    .SessaoItem {
+        left: 75%;
+    }
+
+
+    /* Posição do Valor */
+
+
+
+    .ValorItem {
+        left: 75%;
+    }
+
+    /* Posição do Origem */
+
+
+
+    .OrigemItem {
+        left: 77%;
+    }
+
+    /* Posição do Marca*/
+
+
+
+    .MarcaItem {
+        left: 75%;
+    }
+
+    /* Posição do Descriçãos*/
+
+
+
+    .DescriItem {
+        left: 45%;
+    }
+
+    .split {
+        width: 250px;
+    }
+
+    .lupa1 {
+        width: 20px;
+    }
+
+    .lupa {
+        left: 91.9%;
+        top: -83%;
+    }
+
+    .modal {
+        width: 70%;
+        top: -1.3%;
+    }
+
+    .Prod2 {
+        width: 150px;
+        height: 60%;
+    }
+
+    .button1 {
+        background-color: white;
+        border: none;
+        text-align: center;
+        text-decoration: none;
+        -webkit-text-fill-color: #333;
+        border: 2px solid #04AA6D;
+        transition-duration: 0.4s;
+    }
+
+    .button1a {
+        width: 100px;
+    }
+
+            .button1:hover {
+                background-color: #04AA6D;
+                color: white;
+
+    }
+</style>
+
 <p>
-    <a asp-action="Create">Create New</a>
+    <input type="button" class="button1 button1a" <a asp-action="Create">Novo</a>>
 </p>
+
 <table class="table">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nome)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DescricaoDetalhada)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Preco)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ImagemUrl)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsProdutoPreferido)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EstoqueMinimo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Categoria)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Lote)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DescricaoDetalhada)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Preco)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ImagemUrl)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsProdutoPreferido)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EstoqueMinimo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Categoria.CategoriaNome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Lote.Referencia)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ProdutoId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ProdutoId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ProdutoId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
+        <div style="overflow-x:auto;">
+            <table>
+                <tr>
+                    <th class="tr1th0">Editar</th>
+                    <th class="tr1th0">Detalhes</th>
+                    <th class="tr1th1">Código</th>
+                    <th class="tr1th2">Nome</th>
+                    <th class="tr1th3">Estoque</th>
+                    <th class="tr1th4">Status</th>
+                    <th class="tr1th5">Favorito</th>
+                    <th class="tr1th6">Última Modificação</th>
+                    <th class="tr1th7">Excluir</th>
+                </tr>
+        </div>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ImagemUrl)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ProdutoId">Edit</a>
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.ProdutoId">Details</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProdutoId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estoque)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProdutoId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsProdutoPreferido)
+                </td>
+                <td>
+                    @ViewData["Data"]
+                </td>
+                <td>
+
+                    <a src="https://cdn-icons-png.flaticon.com/128/73/73806.png" width="20px" asp-action="Delete" asp-route-id="@item.ProdutoId">Delete</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+</table>
 </table>
