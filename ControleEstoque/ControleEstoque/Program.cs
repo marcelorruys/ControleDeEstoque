@@ -38,8 +38,16 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
+    name: "categoriaFiltro",
+    pattern: "Produto/{action}/{categoria?}",
+    defaults: new { Controller = "Produto", Action = "List" });
+
 
 app.Run();

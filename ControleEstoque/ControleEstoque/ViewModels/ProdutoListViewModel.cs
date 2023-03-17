@@ -1,10 +1,9 @@
 ﻿using ControleEstoque.Models;
 
-namespace ControleEstoque.ViewModels
+namespace ControleEstoque.ViewModels;
+
+public class ProdutoListViewModel
 {
-    public class ProdutoListViewModel
-    {
-        public IEnumerable<Produto> Produtos { get; set; }
-        public string CategoriaAtual { get; set; }
-    }
+    public IEnumerable<Produto> Produtos { get; set; }
+    public string CategoriaAtual { get; set; }
 }

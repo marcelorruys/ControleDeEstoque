@@ -4,114 +4,141 @@ using ControleEstoque.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ControleEstoque.Controllers
+namespace ControleEstoque.Controllers;
+
+public class ProdutoController : Controller
 {
-    public class ProdutoController : Controller
+    private readonly IProdutoRepository _produtoRepository;
+
+    public ProdutoController(IProdutoRepository produtoRepository)
     {
-        private readonly IProdutoRepository _produtoRepository;
+        _produtoRepository = produtoRepository;
+    }
+    // GET: ProdutoController
+    public ActionResult List(string categoria)
+    {
+        IEnumerable<Produto> produtos;
+        string categoriaAtual = string.Empty;
 
-        public ProdutoController(IProdutoRepository produtoRepository)
+        if (string.IsNullOrEmpty(categoria))
         {
-            _produtoRepository = produtoRepository;
+            produtos = _produtoRepository.Produtos.OrderBy(p => p.ProdutoId);
+            categoriaAtual = "Todos os Produtos";
         }
-        // GET: ProdutoController
-        public ActionResult List(string categoria)
+        else
         {
-            IEnumerable<Produto> produtos;
-            string categoriaAtual = string.Empty;
+            produtos = _produtoRepository.Produtos
+                      .Where(p => p.Categoria.CategoriaNome.Equals(categoria))
+            .OrderBy(c => c.Nome);
 
-            if (string.IsNullOrEmpty(categoria))
-            {
-                produtos = _produtoRepository.Produtos.OrderBy(p => p.ProdutoId);
-                categoriaAtual = "Todos os Produtos";
-            }
+            categoriaAtual = categoria;
+        }
+
+        var produtosListViewModel = new ProdutoListViewModel
+        {
+            Produtos = produtos,
+            CategoriaAtual = categoriaAtual
+        };
+
+        ViewData["Data"] = DateTime.Now;
+
+        return View(produtosListViewModel);
+    }
+
+    public ViewResult Search(string searchString)
+    {
+        IEnumerable<Produto> produtos;
+        string categoriaAtual = string.Empty;
+
+        if (string.IsNullOrEmpty(searchString))
+        {
+            produtos = _produtoRepository.Produtos.OrderBy(p => p.ProdutoId);
+            categoriaAtual = "Todos os Produtos";
+        }
+        else
+        {
+            produtos = _produtoRepository.Produtos
+                      .Where(p => p.Nome.ToLower().Contains(searchString.ToLower()));
+
+            if (produtos.Any())
+                categoriaAtual = "Produtos";
             else
-            {
-                produtos = _produtoRepository.Produtos
-                          .Where(p => p.Categoria.CategoriaNome.Equals(categoria))
-                .OrderBy(c => c.Nome);
-
-                categoriaAtual = categoria;
-            }
-
-            var produtosListViewModel = new ProdutoListViewModel
-            {
-                Produtos = produtos,
-                CategoriaAtual = categoriaAtual
-            };
-
-            ViewData["Data"] = DateTime.Now;
-
-            return View(produtosListViewModel);
+                categoriaAtual = "Nenhum produto foi encontrado";
         }
 
-        // GET: ProdutoController/Details/5
-        public ActionResult Details(int id)
+        return View("~/Views/Produto/List.cshtml", new ProdutoListViewModel
+        {
+            Produtos = produtos,
+            CategoriaAtual = categoriaAtual
+        });
+    }
+
+    // GET: ProdutoController/Details/5
+    public ActionResult Details(int id)
+    {
+        return View();
+    }
+
+    // GET: ProdutoController/Create
+    public ActionResult Create()
+    {
+        return View();
+    }
+
+    // POST: ProdutoController/Create
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public ActionResult Create(IFormCollection collection)
+    {
+        try
+        {
+            return RedirectToAction(nameof(Index));
+        }
+        catch
         {
             return View();
         }
+    }
 
-        // GET: ProdutoController/Create
-        public ActionResult Create()
+    // GET: ProdutoController/Edit/5
+    public ActionResult Edit(int id)
+    {
+        return View();
+    }
+
+    // POST: ProdutoController/Edit/5
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public ActionResult Edit(int id, IFormCollection collection)
+    {
+        try
+        {
+            return RedirectToAction(nameof(Index));
+        }
+        catch
         {
             return View();
         }
+    }
 
-        // POST: ProdutoController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+    // GET: ProdutoController/Delete/5
+    public ActionResult Delete(int id)
+    {
+        return View();
+    }
+
+    // POST: ProdutoController/Delete/5
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public ActionResult Delete(int id, IFormCollection collection)
+    {
+        try
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction(nameof(Index));
         }
-
-        // GET: ProdutoController/Edit/5
-        public ActionResult Edit(int id)
+        catch
         {
             return View();
-        }
-
-        // POST: ProdutoController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: ProdutoController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: ProdutoController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
         }
     }
 }

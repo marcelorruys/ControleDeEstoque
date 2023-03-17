@@ -5,164 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - ControleEstoque</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/layout.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/ControleEstoque.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/EcommerceMvc.styles.css" asp-append-version="true" />
 </head>
-
-<style>
-    /* Customização da Barra de Navegação Principal */
-    body {
-        background-color: #FFFAFA;
-        align-items: center;
-    }
-
-    form {
-        border-color: aqua;
-    }
-
-    a {
-        text-decoration: none;
-    }
-
-    /* Fundo da barra de navegação */
-    .topnav {
-        background-color: #333;
-        overflow: hidden;
-    }
-
-        /* Tamanho e alinhamenrto da barra de navegação */
-        .topnav a {
-            float: left;
-            color: #f2f2f2;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-            font-size: 17px;
-        }
-
-            /* Cor para quando se passa o cursor por cima */
-            .topnav a:hover {
-                background-color: #737373;
-                color: black;
-            }
-
-            /* Cor para a página ativa */
-            .topnav a.active {
-                background-color: #04AA6D;
-                color: white;
-            }
-
-    /* Segunda barra de navegação */
-    .logo-image {
-        width: 15px;
-        height: 30px;
-        border-radius: 0%;
-        overflow: hidden;
-        margin-right: -10px;
-    }
-
-    /* Customização da segunda barra */
-    .bottomnav {
-        width: 100%;
-        height: 20%;
-        background-color: #555;
-        overflow: auto;
-    }
-
-    .bottomnav-custom {
-        height: 50px;
-    }
-
-    /* Links da barra */
-    .bottomnav a {
-        float: left;
-        text-align: center;
-        padding: 12px;
-        color: white;
-        text-decoration: none;
-        font-size: 17px;
-    }
-
-        /* Para quando se passa o cursor por cima */
-        .bottomnav a:hover {
-            background-color: #06e090;
-        }
-
-    /* Área ativa da barra de navegação */
-    .bottomnav {
-        background-color: #04AA6D;
-    }
-
-        /* Barra de pesquisa */
-        .bottomnav input[type=text] {
-            float: right;
-            padding: 6px;
-            border: none;
-            margin-top: 8px;
-            margin-right: 16px;
-            font-size: 17px;
-        }
-</style>
-
 <body>
-    <div class="topnav">
-
-        <a href="#" class="o_menu_toggle" title="home menu" arual-label="home menu" data-hotkey="h">
-            <svg xmlns="http://www.w3.org/20000svg" width="14px" height="14px" viewBox="0 0 14 14">
-                <g fill="currentColor" id="o_menu_toggle_row_0">
-                    <rect width="4" height="4" x="0" y="0"></rect>
-                    <rect width="4" height="4" x="5" y="0"></rect>
-                    <rect width="4" height="4" x="10" y="0"></rect>
-                </g>
-                <g fill="currentColor" id="o_menu_toggle_row_1">
-                    <rect width="4" height="4" x="0" y="5"></rect>
-                    <rect width="4" height="4" x="5" y="5"></rect>
-                    <rect width="4" height="4" x="10" y="5"></rect>
-                </g>
-                <g fill="currentColor" id="o_menu_toggle_row_2">
-                    <rect width="4" height="4" x="0" y="10"></rect>
-                    <rect width="4" height="4" x="5" y="10"></rect>
-                    <rect width="4" height="4" x="10" y="10"></rect>
-                </g>
-            </svg>
-        </a>
-
-        <a class="active" href="#home">INVENTÁRIO</a>
-        <a asp-controller="Produto" asp-action="List">Produtos</a>
-        <a href="#contact">Aba 2</a>
-        <a href="#about">Aba 3</a>
-    </div>
-
-    <!-- Barra de navegação secundária -->
-
-    <div class="bottomnav">
-
-        <a class="navbar-brand" href="#">
-            <div class="logo-image">
-                <img src="~/images/agrupamento.png" class="img-fluid">
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand home-link" asp-area="" asp-controller="Home" asp-action="Index">
+                    Home
+                </a>
+                @await Component.InvokeAsync("CategoriaMenu")
+                @*<a class="nav-link text-light" asp-area="" asp-controller="Produto" asp-action="List">Produtos</a>*@
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <form class="navbar-form navbar-right" asp-controller="Produto" asp-action="Search" method="get">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Procurar produto" name="searchString" value="@ViewData["searchString"]">
+                        </div>
+                    </form>
+                    @*<a class="nav-link text-light" asp-area="" asp-controller="Produto" asp-action="List">Produtos</a>*@
+                </div>
             </div>
-        </a>
-        <a href="#">Agrupamento</a>
-        <a class="navbar-brand" href="#">
-            <div class="logo-image">
-                <img src="~/images/Filtro.png" class="img-fluid">
-            </div>
-        </a>
-        <a href="#contact">Filtros</a>
-
-        <a class="navbar-brand" href="#">
-            <div class="logo-image">
-                <img src="~/images/Favorito.png" class="img-fluid">
-            </div>
-        </a>
-        <a href="#contact">Favoritos</a>
-        <a class="navbar-brand" href="#"></a>
-        <input type="text" placeholder="Search.." class="split">
-        <form role="search" method="get" class="search-field" action=""></form>
-        </input>
-    </div>
-    <p></p>
-
+        </nav>
+    </header>
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -171,7 +41,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2023 - ControleEstoque - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2023 - ControleEstoque @*- <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>*@
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

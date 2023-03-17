@@ -1,12 +1,8 @@
 ﻿using ControleEstoque.Models;
 
-namespace ControleEstoque.Repositories.Interfaces
+namespace ControleEstoque.Repositories.Interfaces;
+
+public interface ICategoriaRepository
 {
-    public interface ICategoriaRepository
-    {
-        public interface ICategoriaRepository
-        {
-            IEnumerable<Categoria> Categorias { get; }
-        }
-    }
+    IEnumerable<Categoria> Categorias { get; }
 }
