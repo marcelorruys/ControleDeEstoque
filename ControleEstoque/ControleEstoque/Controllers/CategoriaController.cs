@@ -1,15 +1,20 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using ControleEstoque.Models;
+using ControleEstoque.Repositories.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ControleEstoque.Controllers;
 
 public class CategoriaController : Controller
 {
+    private readonly ICategoriaRepository _categoriaRepository;
+    
     // GET: CategoriaController
     public ActionResult Index()
     {
-
-        return View();
+        IEnumerable<Categoria> Categorias;
+        Categorias = _categoriaRepository.Categorias;
+        return View(Categorias);
     }
 
     // GET: CategoriaController/Details/5
