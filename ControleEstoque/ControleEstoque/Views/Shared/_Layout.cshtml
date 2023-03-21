@@ -17,6 +17,7 @@
                     Home
                 </a>
                 @await Component.InvokeAsync("CategoriaMenu")
+                <a class="nav-link text-light" asp-area="" asp-controller="Categoria" asp-action="Index">Categorias</a>
                 @*<a class="nav-link text-light" asp-area="" asp-controller="Produto" asp-action="List">Produtos</a>*@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -26,7 +27,9 @@
                     <form class="navbar-form navbar-right" asp-controller="Produto" asp-action="Search" method="get">
                         <div class="form-group">
                             <input type="text" class="form-control" placeholder="Procurar produto" name="searchString" value="@ViewData["searchString"]">
-                            <i class="bi bi-search"></i>
+                            <button asp-controller ="Produto" asp-action="Search">
+                                <i class="bi bi-search"></i>
+                                </button>
                         </div>
                     </form>
                     @*<a class="nav-link text-light" asp-area="" asp-controller="Produto" asp-action="List">Produtos</a>*@

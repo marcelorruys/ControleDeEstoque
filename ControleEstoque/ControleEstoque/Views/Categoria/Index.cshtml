@@ -1,12 +1,6 @@
 ﻿@model IEnumerable<ControleEstoque.Models.Categoria>
 
-@{
-    ViewData["Title"] = "Index";
-}
-
-<h1>Index</h1>
-
-@model IEnumerable<Categoria>
+<h1>Categorias</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -16,28 +10,13 @@
 
         <div class="card" style="width: 18rem;">
       <div class="card-body">
-        <h5 class="card-title">@Html.DisplayFor(item
-        )</h5>
-        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="#" class="card-link">Card link</a>
-        <a href="#" class="card-link">Another link</a>
+        <h5 class="card-title">@item.CategoriaNome</h5>
+        <br>
+        <p class="card-text">@item.Descricao</p>
+            <a asp-action="Edit" asp-route-id="@item.CategoriaId">Edit</a> |
+            <a asp-action="Details" asp-route-id="@item.CategoriaId">Details</a> |
+            <a asp-action="Delete" asp-route-id="@item.CategoriaId">Delete</a>
       </div>
     </div>
-
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CategoriaNome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descricao)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.CategoriaId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.CategoriaId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.CategoriaId">Delete</a>
-            </td>
-        </tr>
 }
-    </tbody>
-</table>
+    

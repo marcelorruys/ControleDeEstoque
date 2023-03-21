@@ -23,7 +23,7 @@ nav a:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 5px;
+    border-radius: 0px 10px 0px 0px !important;
 }
 
     .form-group .bi {
@@ -31,5 +31,13 @@ nav a:hover {
         text-align: center;
         color: #fff;
         background-color: #000;
-        border-radius: 5px;
+        border-radius: 0px 5px 5px 0px;
+        cursor: pointer;
     }
+
+
+
+.form-group button {
+    background: none;
+    border: none;
+}

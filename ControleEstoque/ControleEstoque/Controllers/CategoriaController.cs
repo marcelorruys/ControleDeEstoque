@@ -8,7 +8,14 @@ namespace ControleEstoque.Controllers;
 public class CategoriaController : Controller
 {
     private readonly ICategoriaRepository _categoriaRepository;
-    
+
+    public CategoriaController(ICategoriaRepository categoriaRepository)
+    {
+        _categoriaRepository = categoriaRepository;
+    }
+
+
+
     // GET: CategoriaController
     public ActionResult Index()
     {
