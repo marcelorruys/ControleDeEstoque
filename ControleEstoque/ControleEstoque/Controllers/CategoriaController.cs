@@ -33,6 +33,7 @@ public class CategoriaController : Controller
     // GET: CategoriaController/Create
     public ActionResult Create()
     {
+
         return View();
     }
 
@@ -43,6 +44,7 @@ public class CategoriaController : Controller
     {
         try
         {
+
             return RedirectToAction(nameof(Index));
         }
         catch
