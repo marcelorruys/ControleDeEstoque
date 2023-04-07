@@ -4,16 +4,16 @@ namespace ControleEstoque.Models;
 
 public class Fornecedor
 {
-
+    [Key]
     public int FornecedorId { get; set; }
 
     [Required(ErrorMessage = "O nome do fornecedor deve ser informado")]
-    [Display(Name = "Nome do Produto")]
+    [Display(Name = "Nome")]
     [StringLength(80, MinimumLength = 10, ErrorMessage = "O {0} deve ter no mínimo {1} e no máximo {2} caracteres")]
     public string Nome { get; set; }
 
     [Required(ErrorMessage = "A Razão Social do fornecedor deve ser informada")]
-    [Display(Name = "Nome do Produto")]
+    [Display(Name = "Razão Social")]
     [StringLength(80, MinimumLength = 10, ErrorMessage = "O {0} deve ter no mínimo {1} e no máximo {2} caracteres")]
     public string RazaoSocial { get; set; }
 
@@ -59,11 +59,10 @@ public class Fornecedor
     public string Cidade { get; set; }
 
     [Required(ErrorMessage = "A descrição do Fornecedor deve ser informada")]
-    [Display(Name = "Descrição detalhada do Lanche")]
+    [Display(Name = "Descrição")]
     [MinLength(20, ErrorMessage = "Descrição detalhada deve ter no mínimo {1} caracteres")]
     [MaxLength(200, ErrorMessage = "Descrição detalhada pode exceder {1} caracteres")]
     public string DescricaoDetalhada { get; set; }
 
-    public int LoteId { get; set; }
-    public virtual Lote Lote { get; set; }
+    public ICollection<Lote> Lotes { get; set; }
 }

@@ -10,85 +10,90 @@ using ControleEstoque.Models;
 
 namespace ControleEstoque.Controllers
 {
-    public class CategoriaController : Controller
+    public class LoteController : Controller
     {
         private readonly AppDbContext _context;
 
-        public CategoriaController(AppDbContext context)
+        public LoteController(AppDbContext context)
         {
             _context = context;
         }
 
-        // GET: Categoria
+        // GET: Lote
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Categoria.ToListAsync());
+            var appDbContext = _context.Lote.Include(l => l.Fornecedor);
+            return View(await appDbContext.ToListAsync());
         }
 
-        // GET: Categoria/Details/5
+        // GET: Lote/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Categoria == null)
+            if (id == null || _context.Lote == null)
             {
                 return NotFound();
             }
 
-            var categoria = await _context.Categoria
-                .FirstOrDefaultAsync(m => m.CategoriaId == id);
-            if (categoria == null)
+            var lote = await _context.Lote
+                .Include(l => l.Fornecedor)
+                .FirstOrDefaultAsync(m => m.LoteId == id);
+            if (lote == null)
             {
                 return NotFound();
             }
 
-            return View(categoria);
+            return View(lote);
         }
 
-        // GET: Categoria/Create
+        // GET: Lote/Create
         public IActionResult Create()
         {
+            ViewData["FornecedorId"] = new SelectList(_context.Fornecedor, "FornecedorId", "Cep");
             return View();
         }
 
-        // POST: Categoria/Create
+        // POST: Lote/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CategoriaId,CategoriaNome,Descricao")] Categoria categoria)
+        public async Task<IActionResult> Create([Bind("LoteId,Referencia,FornecedorId")] Lote lote)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(categoria);
+                _context.Add(lote);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(categoria);
+            ViewData["FornecedorId"] = new SelectList(_context.Fornecedor, "FornecedorId", "Cep", lote.FornecedorId);
+            return View(lote);
         }
 
-        // GET: Categoria/Edit/5
+        // GET: Lote/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Categoria == null)
+            if (id == null || _context.Lote == null)
             {
                 return NotFound();
             }
 
-            var categoria = await _context.Categoria.FindAsync(id);
-            if (categoria == null)
+            var lote = await _context.Lote.FindAsync(id);
+            if (lote == null)
             {
                 return NotFound();
             }
-            return View(categoria);
+            ViewData["FornecedorId"] = new SelectList(_context.Fornecedor, "FornecedorId", "Cep", lote.FornecedorId);
+            return View(lote);
         }
 
-        // POST: Categoria/Edit/5
+        // POST: Lote/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CategoriaId,CategoriaNome,Descricao")] Categoria categoria)
+        public async Task<IActionResult> Edit(int id, [Bind("LoteId,Referencia,FornecedorId")] Lote lote)
         {
-            if (id != categoria.CategoriaId)
+            if (id != lote.LoteId)
             {
                 return NotFound();
             }
@@ -97,12 +102,12 @@ namespace ControleEstoque.Controllers
             {
                 try
                 {
-                    _context.Update(categoria);
+                    _context.Update(lote);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CategoriaExists(categoria.CategoriaId))
+                    if (!LoteExists(lote.LoteId))
                     {
                         return NotFound();
                     }
@@ -113,49 +118,51 @@ namespace ControleEstoque.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(categoria);
+            ViewData["FornecedorId"] = new SelectList(_context.Fornecedor, "FornecedorId", "Cep", lote.FornecedorId);
+            return View(lote);
         }
 
-        // GET: Categoria/Delete/5
+        // GET: Lote/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Categoria == null)
+            if (id == null || _context.Lote == null)
             {
                 return NotFound();
             }
 
-            var categoria = await _context.Categoria
-                .FirstOrDefaultAsync(m => m.CategoriaId == id);
-            if (categoria == null)
+            var lote = await _context.Lote
+                .Include(l => l.Fornecedor)
+                .FirstOrDefaultAsync(m => m.LoteId == id);
+            if (lote == null)
             {
                 return NotFound();
             }
 
-            return View(categoria);
+            return View(lote);
         }
 
-        // POST: Categoria/Delete/5
+        // POST: Lote/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Categoria == null)
+            if (_context.Lote == null)
             {
-                return Problem("Entity set 'AppDbContext.Categoria'  is null.");
+                return Problem("Entity set 'AppDbContext.Lote'  is null.");
             }
-            var categoria = await _context.Categoria.FindAsync(id);
-            if (categoria != null)
+            var lote = await _context.Lote.FindAsync(id);
+            if (lote != null)
             {
-                _context.Categoria.Remove(categoria);
+                _context.Lote.Remove(lote);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CategoriaExists(int id)
+        private bool LoteExists(int id)
         {
-          return _context.Categoria.Any(e => e.CategoriaId == id);
+          return _context.Lote.Any(e => e.LoteId == id);
         }
     }
 }

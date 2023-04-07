@@ -13,6 +13,7 @@ namespace ControleEstoque.Context
         public DbSet<Produto> Produto { get; set; }
         public DbSet<Fornecedor> Fornecedor { get; set; }
         public DbSet<Categoria> Categoria { get; set; }
+        public DbSet<ControleEstoque.Models.Lote> Lote { get; set; }
 
 
     }

@@ -12,12 +12,12 @@ public class Produto
 
     [Required(ErrorMessage = "O nome do produto deve ser informado")]
     [Display(Name = "Nome")]
-    [StringLength(80, MinimumLength = 10, ErrorMessage = "O {0} deve ter no mínimo {2} e no máximo {1} caracteres")]
+    [StringLength(80, MinimumLength = 2, ErrorMessage = "O {0} deve ter no mínimo {2} e no máximo {1} caracteres")]
     public string Nome { get; set; }
 
-    [Required(ErrorMessage = "O descrição detalhada do produto deve ser informada")]
+    [Required(ErrorMessage = "A descrição do produto deve ser informada")]
     [Display(Name = "Descrição")]
-    [MinLength(20, ErrorMessage = "Descrição deve ter no mínimo {1} caracteres")]
+    [MinLength(10, ErrorMessage = "Descrição deve ter no mínimo {1} caracteres")]
     [MaxLength(200, ErrorMessage = "Descrição não pode exceder {1} caracteres")]
     public string DescricaoDetalhada { get; set; }
 
