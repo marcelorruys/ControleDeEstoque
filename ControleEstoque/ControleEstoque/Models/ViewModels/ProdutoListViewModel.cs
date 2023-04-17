@@ -1,6 +1,6 @@
 ﻿using ControleEstoque.Models;
 
-namespace ControleEstoque.ViewModels;
+namespace ControleEstoque.Models.ViewModels;
 
 public class ProdutoListViewModel
 {

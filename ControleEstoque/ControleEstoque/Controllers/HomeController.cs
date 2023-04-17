@@ -1,4 +1,4 @@
-﻿using ControleEstoque.Models;
+﻿using ControleEstoque.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 

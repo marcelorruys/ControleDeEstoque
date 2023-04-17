@@ -1,0 +1,139 @@
+﻿* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+
+body,
+html {
+    height: 100%;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.responsivo-Categoria8,
+.responsivo-8 {
+    margin-left: 10%;
+}
+
+/*--------------------------------------------------------------------*/
+
+
+
+
+/*-----Nome-------*/
+
+.NomeProduto_Fornecedor8 {
+    position: relative;
+    top: 11vh;
+    align-items: center;
+    bottom: 10vh;
+    left: 39Vh;
+}
+
+
+.inputNomeProduto8 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    color: black;
+    display: block;
+    background: whitesmoke;
+    border-radius: 1.5vh;
+    padding: 0% 0px 0px 10px;
+    position: relative;
+    align-items: center;
+    margin-bottom: 5vh;
+    margin-right: 0%;
+    top: 12vh;
+    align-items: center;
+    width: 300PX;
+}
+
+/*--------------------------------------------------------------------*/
+
+
+/*-----Botao Criar-------*/
+
+
+.Botaocriar8 {
+    background-color: #04AA7D;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    text-decoration: none;
+    padding: 1vh 4vh 1vh 4vh;
+    position: relative;
+    left: 47VH;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: 3vh;
+    top: 8vh;
+}
+
+    .Botaocriar8:active {
+        background-color: #4fae8b;
+        text-decoration: none;
+        background: white;
+        color: #fff;
+    }
+
+/*--------------------------------------------------------------------*/
+
+/*-----Botao Voltar-------*/
+
+
+.BotaoVoltar8 {
+    background-color: #04AA7D;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    text-decoration: none;
+    padding: 1vh 4vh 1vh 4vh;
+    position: relative;
+    left: 25VH;
+    top: 0.5vh;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: 3vh;
+}
+
+    .BotaoVoltar8:active {
+        background-color: #4fae8b;
+        text-decoration: none;
+        background: white;
+        color: #fff;
+    }
+
+/*--------------------------------------------------------------------*/
+/*--------------------------------------------------------------------*/
+
+/*-----Descrião -------*/
+
+.Descricao_Categoria8 {
+    position: relative;
+    align-items: center;
+    left: 37VH;
+    top: 9vh;
+    bottom: 10vh;
+    ;
+}
+
+.DescricaoCategoria8 {
+    margin-top: 1vh;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    color: black;
+    display: block;
+    background: whitesmoke;
+    border-radius: 1.5vh;
+    padding: 0% 00% 0% 7%;
+    position: relative;
+    align-items: center;
+    margin-bottom: 5vh;
+    top: 10vh;
+    width: 300PX;
+    height: 200PX;
+}
