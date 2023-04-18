@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ControleEstoque.Context;
@@ -33,7 +29,7 @@ public class LoteController : Controller
     {
         if (id == null || _context.Lote == null)
         {
-            return RedirectToAction(nameof(Error), new { message = "O fornecedor não foi encontrado" });
+            return RedirectToAction(nameof(Error), new { message = "Código inválido" });
         }
 
         var lote = await _context.Lote
@@ -41,7 +37,7 @@ public class LoteController : Controller
             .FirstOrDefaultAsync(m => m.LoteId == id);
         if (lote == null)
         {
-            return RedirectToAction(nameof(Error), new { message = "O fornecedor não foi encontrado" });
+            return RedirectToAction(nameof(Error), new { message = "O lote não foi encontrado" });
         }
 
         return View(lote);
@@ -76,13 +72,13 @@ public class LoteController : Controller
     {
         if (id == null || _context.Lote == null)
         {
-            return NotFound();
+            return RedirectToAction(nameof(Error), new { message = "Código inválido" });
         }
 
         var lote = await _context.Lote.FindAsync(id);
         if (lote == null)
         {
-            return NotFound();
+            return RedirectToAction(nameof(Error), new { message = "O lote não foi encontrado" });
         }
         ViewData["FornecedorId"] = new SelectList(_context.Fornecedor, "FornecedorId", "Cep", lote.FornecedorId);
         return View(lote);
@@ -97,7 +93,7 @@ public class LoteController : Controller
     {
         if (id != lote.LoteId)
         {
-            return NotFound();
+            return RedirectToAction(nameof(Error), new { message = "Código inválido" });
         }
 
         if (ModelState.IsValid)
@@ -111,11 +107,7 @@ public class LoteController : Controller
             {
                 if (!LoteExists(lote.LoteId))
                 {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
+                    return RedirectToAction(nameof(Error), new { message = "O lote selecionado não foi encontrado" });
                 }
             }
             return RedirectToAction(nameof(Index));
@@ -129,7 +121,7 @@ public class LoteController : Controller
     {
         if (id == null || _context.Lote == null)
         {
-            return NotFound();
+            return RedirectToAction(nameof(Error), new { message = "Código inválido" });
         }
 
         var lote = await _context.Lote
@@ -137,7 +129,7 @@ public class LoteController : Controller
             .FirstOrDefaultAsync(m => m.LoteId == id);
         if (lote == null)
         {
-            return NotFound();
+            return RedirectToAction(nameof(Error), new { message = "O lote não foi encontrado" });
         }
 
         return View(lote);
@@ -150,7 +142,7 @@ public class LoteController : Controller
     {
         if (_context.Lote == null)
         {
-            return Problem("Entity set 'AppDbContext.Lote'  is null.");
+            return RedirectToAction(nameof(Error), new { message = "O lote selecionado não possui nenhum valor" });
         }
         var lote = await _context.Lote.FindAsync(id);
         if (lote != null)

@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ControleEstoque.Context;
 using ControleEstoque.Models;
+using ControleEstoque.Models.ViewModels;
+using System.Diagnostics;
 
 namespace ControleEstoque.Controllers;
 
@@ -27,7 +29,7 @@ public class ProdutoController : Controller
     {
         if (id == null || _context.Produto == null)
         {
-            return NotFound();
+            return RedirectToAction(nameof(Error), new { message = "Código inválido" });
         }
 
         var produto = await _context.Produto
@@ -73,13 +75,13 @@ public class ProdutoController : Controller
     {
         if (id == null || _context.Produto == null)
         {
-            return NotFound();
+            return RedirectToAction(nameof(Error), new { message = "Código inválido" });
         }
 
         var produto = await _context.Produto.FindAsync(id);
         if (produto == null)
         {
-            return NotFound();
+            return RedirectToAction(nameof(Error), new { message = "O produto não foo encontrado" });
         }
         ViewData["CategoriaId"] = new SelectList(_context.Categoria, "CategoriaId", "CategoriaNome", produto.CategoriaId);
         ViewData["LoteId"] = new SelectList(_context.Set<Lote>(), "LoteId", "Referencia", produto.LoteId);
@@ -95,7 +97,7 @@ public class ProdutoController : Controller
     {
         if (id != produto.ProdutoId)
         {
-            return NotFound();
+            return RedirectToAction(nameof(Error), new { message = "Código inválido" });
         }
 
         if (ModelState.IsValid)
@@ -109,11 +111,7 @@ public class ProdutoController : Controller
             {
                 if (!ProdutoExists(produto.ProdutoId))
                 {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
+                    return RedirectToAction(nameof(Error), new { message = "O produto selecionado não foi encontrado" });
                 }
             }
             return RedirectToAction(nameof(Index));
@@ -128,7 +126,7 @@ public class ProdutoController : Controller
     {
         if (id == null || _context.Produto == null)
         {
-            return NotFound();
+            return RedirectToAction(nameof(Error), new { message = "Código inválido" });
         }
 
         var produto = await _context.Produto
@@ -137,7 +135,7 @@ public class ProdutoController : Controller
             .FirstOrDefaultAsync(m => m.ProdutoId == id);
         if (produto == null)
         {
-            return NotFound();
+            return RedirectToAction(nameof(Error), new { message = "O produto selecionado não foi encontrado" });
         }
 
         return View(produto);
@@ -150,7 +148,7 @@ public class ProdutoController : Controller
     {
         if (_context.Produto == null)
         {
-            return Problem("Entity set 'AppDbContext.Produto'  is null.");
+            return RedirectToAction(nameof(Error), new { message = "O produto seleionado não possui nenhum valor" });
         }
         var produto = await _context.Produto.FindAsync(id);
         if (produto != null)
@@ -165,5 +163,15 @@ public class ProdutoController : Controller
     private bool ProdutoExists(int id)
     {
       return _context.Produto.Any(e => e.ProdutoId == id);
+    }
+
+    public IActionResult Error(string message)
+    {
+        var viewModel = new ErrorViewModel
+        {
+            Message = message,
+            RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+        };
+        return View(viewModel);
     }
 }
