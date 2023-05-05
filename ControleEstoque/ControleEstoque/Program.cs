@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 string mySqlConnection =
-              builder.Configuration.GetConnectionString("EtecConnection");
+              builder.Configuration.GetConnectionString("DefaultConnection");
 
 builder.Services.AddDbContextPool<AppDbContext>(options =>
                 options.UseMySql(mySqlConnection,

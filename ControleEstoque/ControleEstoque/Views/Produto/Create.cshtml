@@ -3,61 +3,81 @@
 @{
     ViewData["Title"] = "Create";
 }
+<style>
+.inputCadastro6_FOTO2 {
+        font-family: Arial, Helvetica, sans-serif;
+      font-size: 15px;
+      line-height: 1.5;
+      color: black;
+      display: block;
+      background: whitesmoke;
 
+    }
+</style>
 <h1>Create</h1>
 
 <h4>Produto</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-12">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Nome" class="control-label"></label>
-                <input asp-for="Nome" class="form-control" />
+                <label class="control-label"> Nome do produto</label>
+                <input asp-for="Nome" class="form-control inputCadastro6_FOTO2" />
                 <span asp-validation-for="Nome" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group">
                 <label asp-for="DescricaoDetalhada" class="control-label"></label>
-                <input asp-for="DescricaoDetalhada" class="form-control" />
+                <input asp-for="DescricaoDetalhada" class="form-control inputCadastro6_FOTO2" />
                 <span asp-validation-for="DescricaoDetalhada" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group">
                 <label asp-for="ImagemUrl" class="control-label"></label>
-                <input asp-for="ImagemUrl" class="form-control" />
+                <input asp-for="ImagemUrl" class="form-control inputCadastro6_FOTO2" />
                 <span asp-validation-for="ImagemUrl" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsProdutoPreferido" /> @Html.DisplayNameFor(model => model.IsProdutoPreferido)
+                    <input class="form-check-input inputCadastro6_FOTO2" asp-for="IsProdutoPreferido" /> @Html.DisplayNameFor(model => model.IsProdutoPreferido)
                 </label>
             </div>
+            <br />
             <div class="form-group">
                 <label asp-for="EstoqueMinimo" class="control-label"></label>
-                <input asp-for="EstoqueMinimo" class="form-control" />
+                <input asp-for="EstoqueMinimo" class="form-control inputCadastro6_FOTO2" />
                 <span asp-validation-for="EstoqueMinimo" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group">
                 <label asp-for="EstoqueMaximo" class="control-label"></label>
-                <input asp-for="EstoqueMaximo" class="form-control" />
+                <input asp-for="EstoqueMaximo" class="form-control inputCadastro6_FOTO2  />
                 <span asp-validation-for="EstoqueMaximo" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group">
                 <label asp-for="Estoque" class="control-label"></label>
-                <input asp-for="Estoque" class="form-control" />
+                <input asp-for="Estoque" class="form-control inputCadastro6_FOTO2" />
                 <span asp-validation-for="Estoque" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group">
                 <label asp-for="CategoriaId" class="control-label"></label>
-                <select asp-for="CategoriaId" class ="form-control" asp-items="ViewBag.CategoriaId"></select>
+                <select asp-for="CategoriaId" class="form-control inputCadastro6_FOTO2" asp-items="ViewBag.CategoriaId"></select>
             </div>
+            <br />
             <div class="form-group">
                 <label asp-for="LoteId" class="control-label"></label>
-                <select asp-for="LoteId" class ="form-control" asp-items="ViewBag.LoteId"></select>
+                <select asp-for="LoteId" class="form-control inputCadastro6_FOTO2" asp-items="ViewBag.LoteId"></select>
             </div>
+            <br />
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
+
         </form>
     </div>
 </div>
