@@ -5,9 +5,11 @@ using ControleEstoque.Context;
 using ControleEstoque.Models;
 using ControleEstoque.Models.ViewModels;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ControleEstoque.Controllers;
 
+[Authorize]
 public class LoteController : Controller
 {
     private readonly AppDbContext _context;

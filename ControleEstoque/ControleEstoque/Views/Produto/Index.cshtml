@@ -1,10 +1,7 @@
-﻿@model IEnumerable<ControleEstoque.Models.Produto>
+﻿@model ProdutoListViewModel
 
-@{
-    ViewData["Title"] = "Index";
-}
 
-<h1>Index</h1>
+<h1>@Model.CategoriaAtual</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -13,34 +10,34 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Nome)
+                Nome
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ImagemUrl)
+                Link da Imagem
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IsProdutoPreferido)
+                Favoritos
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.EstoqueMinimo)
+                Estoque mínimo
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.EstoqueMaximo)
+                Estoque máximo
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Estoque)
+                Estoque Atual
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Categoria)
+                Categoria
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Lote)
+                Lote
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.Produtos) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Nome)

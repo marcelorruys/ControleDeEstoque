@@ -5,9 +5,11 @@ using ControleEstoque.Context;
 using ControleEstoque.Models;
 using ControleEstoque.Models.ViewModels;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ControleEstoque.Controllers;
 
+[Authorize]
 public class ProdutoController : Controller
 {
     private readonly AppDbContext _context;
@@ -18,10 +20,32 @@ public class ProdutoController : Controller
     }
 
     // GET: Produto
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(string categoria)
     {
-        var appDbContext = _context.Produto.Include(p => p.Categoria).Include(p => p.Lote);
-        return View(await appDbContext.ToListAsync());
+        IEnumerable<Produto> produtos;
+        string categoriaAtual = string.Empty;
+
+        if (string.IsNullOrEmpty(categoria))
+        {
+            produtos = _context.Produto.Include(p => p.Categoria).Include(p => p.Lote).OrderBy(p => p.ProdutoId);
+            categoriaAtual = "Todos os Produtos";
+        }
+        else
+        {
+            produtos = _context.Produto.Include(p => p.Categoria).Include(p => p.Lote)
+                      .Where(p => p.Categoria.CategoriaNome.Equals(categoria))
+                      .OrderBy(c => c.Nome);
+
+            categoriaAtual = categoria;
+        }
+
+        var produtosListViewModel = new ProdutoListViewModel
+        {
+            Produtos = produtos,
+            CategoriaAtual = categoriaAtual
+        };
+
+        return View(produtosListViewModel);
     }
 
     // GET: Produto/Details/5
@@ -42,6 +66,34 @@ public class ProdutoController : Controller
         }
 
         return View(produto);
+    }
+
+    public ViewResult Search(string searchString)
+    {
+        IEnumerable<Produto> produtos;
+        string categoriaAtual = string.Empty;
+
+        if (string.IsNullOrEmpty(searchString))
+        {
+            produtos = _context.Produto.Include(p => p.Categoria).Include(p => p.Lote).OrderBy(p => p.ProdutoId);
+            categoriaAtual = "Todos os Produtos";
+        }
+        else
+        {
+            produtos = _context.Produto.Include(p => p.Categoria)
+                      .Where(p => p.Nome.ToLower().Contains(searchString.ToLower()));
+
+            if (produtos.Any())
+                categoriaAtual = "Produtos";
+            else
+                categoriaAtual = "Nenhum produto foi encontrado";
+        }
+
+        return View("~/Views/Produto/Index.cshtml", new ProdutoListViewModel
+        {
+            Produtos = produtos,
+            CategoriaAtual = categoriaAtual
+        });
     }
 
     // GET: Produto/Create
