@@ -40,11 +40,9 @@ namespace ControleEstoque.Controllers
                 var result = await _signInManager.PasswordSignInAsync(user, loginVM.Password, false, false);
                 if (result.Succeeded)
                 {
-                    if (string.IsNullOrEmpty(loginVM.ReturnUrl))
-                    {
+                    
                         return RedirectToAction("Index", "Home");
-                    }
-                    return Redirect(loginVM.ReturnUrl);
+                    
                 }
             }
             ModelState.AddModelError("", "Falha ao realizar o login!!");
@@ -84,8 +82,6 @@ namespace ControleEstoque.Controllers
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
-            HttpContext.Session.Clear();
-            HttpContext.User = null;
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
