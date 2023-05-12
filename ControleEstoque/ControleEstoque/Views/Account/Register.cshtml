@@ -5,32 +5,50 @@
 }
 
 
-<table class="table">
-    <tr>
-        <td><img class="img-fluid" width="100px" height="100px" src="~/images/avatar.jpeg" alt="Registrar Usuário" /></td>
-        <td>
-            <div class="row">
-                <div class="col-10 col-md-10 col-lg-10">
-                    <h4>Registrar usuário</h4>
-                    <form asp-controller="Account" asp-action="Register" method="post">
-                        <hr />
-                        <div asp-validation-summary="All" class="text-danger"></div>
-                        <div class="form-group">
-                            <label asp-for="UserName"> </label>
-                            <input asp-for="UserName" class="form-control" />
-                            <span asp-validation-for="UserName" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Password"></label>
-                            <input asp-for="Password" class="form-control" />
-                            <span asp-validation-for="Password" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" class="btn btn-success " value="Registrar" />
-                        </div>
-                    </form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ControleEstoque</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/layout.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/styleLgn.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/EcommerceMvc.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <main>
+        <div>
+            <img src="~/images/user.png" class="img-fluid" alt="Usuario Imagem" />
+        </div>
+        <form asp-controller="Account" asp-action="Login" method="post" class="form-horizontal" role="form">
+            <section class="grid-input">
+                <h3>Registrar usuário</h3>
+                <div>
+                    <label for="staticEmail">Usuário</label>
+                    <div class="input-designer">
+                        <input asp-for="UserName"
+                               class="form-control-plaintext" />
+                        <span asp-validation-for="UserName" class="text-danger"></span>
+                    </div>
                 </div>
-            </div>
-        </td>
-    <tr>
-</table>
+                <div>
+                    <label for="inputPassword">Senha</label>
+                    <div class="input-designer">
+                        <input asp-for="Password"
+                               class="form-control-plaintext" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                </div>
+                <div>
+                    <button type="submit">Registrar</button>
+                </div>
+            </section>
+        </form>
+    </main>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>
