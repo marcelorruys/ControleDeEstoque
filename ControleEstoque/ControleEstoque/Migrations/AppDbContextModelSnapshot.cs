@@ -37,7 +37,7 @@ namespace ControleEstoque.Migrations
 
                     b.HasKey("CategoriaId");
 
-                    b.ToTable("Categoria");
+                    b.ToTable("Categoria", (string)null);
                 });
 
             modelBuilder.Entity("ControleEstoque.Models.Fornecedor", b =>
@@ -102,7 +102,7 @@ namespace ControleEstoque.Migrations
 
                     b.HasKey("FornecedorId");
 
-                    b.ToTable("Fornecedor");
+                    b.ToTable("Fornecedor", (string)null);
                 });
 
             modelBuilder.Entity("ControleEstoque.Models.Lote", b =>
@@ -123,7 +123,7 @@ namespace ControleEstoque.Migrations
 
                     b.HasIndex("FornecedorId");
 
-                    b.ToTable("Lote");
+                    b.ToTable("Lote", (string)null);
                 });
 
             modelBuilder.Entity("ControleEstoque.Models.Produto", b =>
@@ -170,7 +170,7 @@ namespace ControleEstoque.Migrations
 
                     b.HasIndex("LoteId");
 
-                    b.ToTable("Produto");
+                    b.ToTable("Produto", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
