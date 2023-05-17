@@ -4,17 +4,14 @@
     ViewData["Title"] = "Create";
 }
 <style>
-.inputCadastro6_FOTO2 {
-        font-family: Arial, Helvetica, sans-serif;
-      font-size: 15px;
-      line-height: 1.5;
-      color: black;
-      display: block;
-      background: whitesmoke;
-
-    }
+.input-designer {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
 </style>
-<h1>Create</h1>
+<h1>Criar</h1>
 
 <h4>Produto</h4>
 <hr />
@@ -22,19 +19,19 @@
     <div class="col-md-12">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+            <div class="form-group input-designer">
                 <label class="control-label"> Nome do produto</label>
                 <input asp-for="Nome" class="form-control inputCadastro6_FOTO2" />
                 <span asp-validation-for="Nome" class="text-danger"></span>
             </div>
             <br />
-            <div class="form-group">
+            <div class="form-group input-designer">
                 <label asp-for="DescricaoDetalhada" class="control-label"></label>
                 <input asp-for="DescricaoDetalhada" class="form-control inputCadastro6_FOTO2" />
                 <span asp-validation-for="DescricaoDetalhada" class="text-danger"></span>
             </div>
             <br />
-            <div class="form-group">
+            <div class="form-group input-designer">
                 <label asp-for="ImagemUrl" class="control-label"></label>
                 <input asp-for="ImagemUrl" class="form-control inputCadastro6_FOTO2" />
                 <span asp-validation-for="ImagemUrl" class="text-danger"></span>
@@ -46,36 +43,36 @@
                 </label>
             </div>
             <br />
-            <div class="form-group">
+            <div class="form-group input-designer">
                 <label asp-for="EstoqueMinimo" class="control-label"></label>
                 <input asp-for="EstoqueMinimo" class="form-control inputCadastro6_FOTO2" />
                 <span asp-validation-for="EstoqueMinimo" class="text-danger"></span>
             </div>
             <br />
-            <div class="form-group">
+            <div class="form-group input-designer">
                 <label asp-for="EstoqueMaximo" class="control-label"></label>
                 <input asp-for="EstoqueMaximo" class="form-control inputCadastro6_FOTO2  />
                 <span asp-validation-for="EstoqueMaximo" class="text-danger"></span>
             </div>
             <br />
-            <div class="form-group">
+            <div class="form-group input-designer">
                 <label asp-for="Estoque" class="control-label"></label>
                 <input asp-for="Estoque" class="form-control inputCadastro6_FOTO2" />
                 <span asp-validation-for="Estoque" class="text-danger"></span>
             </div>
             <br />
-            <div class="form-group">
+            <div class="form-group input-designer">
                 <label asp-for="CategoriaId" class="control-label"></label>
                 <select asp-for="CategoriaId" class="form-control inputCadastro6_FOTO2" asp-items="ViewBag.CategoriaId"></select>
             </div>
             <br />
-            <div class="form-group">
+            <div class="form-group input-designer">
                 <label asp-for="LoteId" class="control-label"></label>
                 <select asp-for="LoteId" class="form-control inputCadastro6_FOTO2" asp-items="ViewBag.LoteId"></select>
             </div>
             <br />
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="form-group input-designer">
+                <input type="submit" value="Criar" class="btn " />
             </div>
 
         </form>
@@ -83,7 +80,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a class="btn " asp-action="Index">Voltar</a>
 </div>
 
 @section Scripts {

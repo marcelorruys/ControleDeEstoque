@@ -20,7 +20,7 @@ public class ProdutoController : Controller
     }
 
     // GET: Produto
-    public async Task<IActionResult> Index(string categoria)
+    public IActionResult Index(string categoria)
     {
         IEnumerable<Produto> produtos;
         string categoriaAtual = string.Empty;
@@ -62,7 +62,7 @@ public class ProdutoController : Controller
             .FirstOrDefaultAsync(m => m.ProdutoId == id);
         if (produto == null)
         {
-            return NotFound();
+            return RedirectToAction(nameof(Error), new { message = "Produto inválido" });
         }
 
         return View(produto);

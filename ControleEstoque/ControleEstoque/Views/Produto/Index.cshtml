@@ -4,9 +4,9 @@
 <h1>@Model.CategoriaAtual</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="btn " asp-action="Create">Novo produto</a>
 </p>
-<table class="table">
+<table class="table table-striped table-hover">
     <thead>
         <tr>
             <th>
@@ -63,10 +63,10 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Lote.Referencia)
             </td>
-            <td>
-                <a class="btn btn-group btn-success" asp-action="Edit" asp-route-id="@item.ProdutoId">Editar</a> |
-                <a class="btn btn-group btn-success" asp-action="Details" asp-route-id="@item.ProdutoId">Detalhes</a> |
-                <a class="btn btn-group btn-success" asp-action="Delete" asp-route-id="@item.ProdutoId">Deletar</a>
+            <td class="btn-group btn-group-sm">
+                <a class="btn  " asp-action="Edit" asp-route-id="@item.ProdutoId">Editar</a> 
+                <a class="btn  " asp-action="Details" asp-route-id="@item.ProdutoId">Detalhes</a> 
+                <a class="btn  " asp-action="Delete" asp-route-id="@item.ProdutoId">Deletar</a>
             </td>
         </tr>
 }
