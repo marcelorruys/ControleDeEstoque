@@ -3,10 +3,16 @@
 @{
     ViewData["Title"] = "Delete";
 }
+<h1>Deletar</h1>
 
+<<<<<<< HEAD
 <h1>Deletar</h1>
 
 <h3>Você tem certeza que deseja deletar este fornecedor?</h3>
+=======
+<h3>Voce tem certeza que deseja deletar?</h3>
+
+>>>>>>> refs/remotes/origin/main
 <div>
     <h4>Fornecedor</h4>
     <hr />
@@ -81,7 +87,12 @@
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="FornecedorId" />
+<<<<<<< HEAD
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a class="btn " asp-action="Index">Voltar</a>
+=======
+        <input type="submit" value="Deletar" class="btn btn-danger" /> |
+        <a class="btn btn-success" asp-action="Index">Voltar</a>
+>>>>>>> refs/remotes/origin/main
     </form>
 </div>

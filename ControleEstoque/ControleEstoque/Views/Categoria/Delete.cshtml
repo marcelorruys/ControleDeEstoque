@@ -5,8 +5,14 @@
 }
 
 <h1>Deletar</h1>
+<<<<<<< HEAD
 
 <h3>Você tem certeza que deseja deletar esta categoria?</h3>
+=======
+
+<h3>Voce tem certeza que deseja deletar?</h3>
+
+>>>>>>> refs/remotes/origin/main
 <div>
     <h4>Categoria</h4>
     <hr />
@@ -27,7 +33,12 @@
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="CategoriaId" />
+<<<<<<< HEAD
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Voltar</a>
+=======
+        <input type="submit" value="Deletar" class="btn btn-danger" /> |
+        <a class="btn btn-success" asp-action="Index">Voltar</a>
+>>>>>>> refs/remotes/origin/main
     </form>
 </div>
