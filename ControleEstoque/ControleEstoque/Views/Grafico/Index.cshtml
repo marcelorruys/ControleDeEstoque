@@ -1,0 +1,64 @@
+﻿<title>
+    @ViewData["Title"] - Grafico dos Produtos
+</title>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<div id="chart_div" style="width: 900px; height: 500px;"></div>
+
+<script type="text/javascript">
+
+    google.charts.load('current', {packages: ['corechart', 'bar']});
+    google.charts.setOnLoadCallback(CarregaDados);
+
+    function CarregaDados() {
+        $.ajax({
+            url: '@Url.Action("ProdutosQuantidade", "GraficoController")',
+            data: {dias: 360},
+            dataType: "json",
+            type: "GET",
+            error: function(xhr, status, error) {
+                var err = eval("(" + xhr.responseText + ")");
+                toastr.error(err.message);
+            },
+            success: function(data) {
+                GraficoVendasLanches(data);
+                return false;
+            }
+        });
+        return false;
+    }
+
+    function GraficoVendasLanches(data) {
+        var dataArray = [
+            ['Produto', 'Quantidade Total', 'Estoque Ideal', 'Estoque Abaixo do Ideal', 'Estoque Acima do Ideal']
+        ];
+        $.each(data, function(i, item) {
+            dataArray.push([item.ProdutoNome, item.QuantidadeTotal, item.QuantidadeIdeal, item.QuantidadeAbaixo, item.QuantidadeAcima]);
+        });
+        var data = google.visualization.arrayToDataTable(dataArray);
+        var options = {
+            title: 'Produtos - Informações dos Registros',
+            chartArea: {
+                width: '70%'
+            },
+            colors: ['##04AA6D', '##04AA6D', '#04AA6D', '#04AA6D'],
+            yAxis: {
+                title: 'Produtos no Estoque Ideal'
+            }
+            hAxis: {
+                title: 'Valor Quantidade Total',
+                minValue: 0
+            },
+            vAxis: {
+                title: 'Produtos Abaixo do Esqtoque Ideal'
+            }
+            xAxis: {
+                title: 'Produtos Acima do Estoque Ideal'
+            }
+            
+        };
+        var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+    }
+</script>

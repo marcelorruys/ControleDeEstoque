@@ -7,11 +7,7 @@
 <h1>Lotes</h1>
 
 <p>
-<<<<<<< HEAD
     <a class="btn " asp-action="Create">Novo lote</a>
-=======
-    <a class="btn btn-success" asp-action="Create">Criar</a>
->>>>>>> refs/remotes/origin/main
 </p>
 <table class="table table-striped table-hover">
     <thead>
@@ -34,18 +30,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Fornecedor.Cep)
             </td>
-<<<<<<< HEAD
             <td class="btn-group btn-group-sm">
                     <a class="btn "asp-action="Edit" asp-route-id="@item.LoteId">Editar</a> 
                     <a class="btn " asp-action="Details" asp-route-id="@item.LoteId">Detalhes</a> 
                     <a class="btn " asp-action="Delete" asp-route-id="@item.LoteId">Deletar</a>
-=======
             <td>
-                    <a class="btn btn-success" asp-action="Edit" asp-route-id="@item.LoteId">Editar</a> |
-                    <a class="btn btn-success" asp-action="Details" asp-route-id="@item.LoteId">Detalhes</a> |
-                    <a class="btn btn-success"asp-action="Delete" asp-route-id="@item.LoteId">Deletar</a>
->>>>>>> refs/remotes/origin/main
-            </td>
         </tr>
 }
     </tbody>
