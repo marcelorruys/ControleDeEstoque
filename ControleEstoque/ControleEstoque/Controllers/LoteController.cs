@@ -19,14 +19,12 @@ public class LoteController : Controller
         _context = context;
     }
 
-    // GET: Lote
     public async Task<IActionResult> Index()
     {
         var appDbContext = _context.Lote.Include(l => l.Fornecedor);
         return View(await appDbContext.ToListAsync());
     }
 
-    // GET: Lote/Details/5
     public async Task<IActionResult> Details(int? id)
     {
         if (id == null || _context.Lote == null)
@@ -45,16 +43,12 @@ public class LoteController : Controller
         return View(lote);
     }
 
-    // GET: Lote/Create
     public IActionResult Create()
     {
-        ViewData["FornecedorId"] = new SelectList(_context.Fornecedor, "FornecedorId", "Cep");
+        ViewData["FornecedorId"] = new SelectList(_context.Fornecedor, "FornecedorId", "Nome");
         return View();
     }
 
-    // POST: Lote/Create
-    // To protect from overposting attacks, enable the specific properties you want to bind to.
-    // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create([Bind("LoteId,Referencia,FornecedorId")] Lote lote)
@@ -65,11 +59,10 @@ public class LoteController : Controller
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-        ViewData["FornecedorId"] = new SelectList(_context.Fornecedor, "FornecedorId", "Cep", lote.FornecedorId);
+        ViewData["FornecedorId"] = new SelectList(_context.Fornecedor, "FornecedorId", "Nome", lote.FornecedorId);
         return View(lote);
     }
 
-    // GET: Lote/Edit/5
     public async Task<IActionResult> Edit(int? id)
     {
         if (id == null || _context.Lote == null)
@@ -82,13 +75,10 @@ public class LoteController : Controller
         {
             return RedirectToAction(nameof(Error), new { message = "O lote não foi encontrado" });
         }
-        ViewData["FornecedorId"] = new SelectList(_context.Fornecedor, "FornecedorId", "Cep", lote.FornecedorId);
+        ViewData["FornecedorId"] = new SelectList(_context.Fornecedor, "FornecedorId", "Nome", lote.FornecedorId);
         return View(lote);
     }
 
-    // POST: Lote/Edit/5
-    // To protect from overposting attacks, enable the specific properties you want to bind to.
-    // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(int id, [Bind("LoteId,Referencia,FornecedorId")] Lote lote)
@@ -114,11 +104,10 @@ public class LoteController : Controller
             }
             return RedirectToAction(nameof(Index));
         }
-        ViewData["FornecedorId"] = new SelectList(_context.Fornecedor, "FornecedorId", "Cep", lote.FornecedorId);
+        ViewData["FornecedorId"] = new SelectList(_context.Fornecedor, "FornecedorId", "Nome", lote.FornecedorId);
         return View(lote);
     }
 
-    // GET: Lote/Delete/5
     public async Task<IActionResult> Delete(int? id)
     {
         if (id == null || _context.Lote == null)
@@ -137,7 +126,6 @@ public class LoteController : Controller
         return View(lote);
     }
 
-    // POST: Lote/Delete/5
     [HttpPost, ActionName("Delete")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteConfirmed(int id)
@@ -151,14 +139,14 @@ public class LoteController : Controller
         {
             _context.Lote.Remove(lote);
         }
-        
+
         await _context.SaveChangesAsync();
         return RedirectToAction(nameof(Index));
     }
 
     private bool LoteExists(int id)
     {
-      return _context.Lote.Any(e => e.LoteId == id);
+        return _context.Lote.Any(e => e.LoteId == id);
     }
     public IActionResult Error(string message)
     {

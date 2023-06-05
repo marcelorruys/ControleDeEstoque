@@ -3,7 +3,6 @@ using ControleEstoque.Repositories.Interfaces;
 using ControleEstoque.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
-using ControleEstoque.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,8 +33,6 @@ builder.Services.Configure<IdentityOptions>(options =>
 
 builder.Services.AddTransient<IProdutoRepository, ProdutoRepository>();
 builder.Services.AddTransient<ICategoriaRepository, CategoriaRepository>();
-
-builder.Services.AddScoped<GraficoService>();
 
 builder.Services.AddControllersWithViews();
 

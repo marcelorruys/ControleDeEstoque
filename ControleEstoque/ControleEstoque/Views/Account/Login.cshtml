@@ -22,6 +22,8 @@
             <img src="~/images/user.png" class="img-fluid" alt="Usuario Imagem" />
         </div>
         <form asp-controller="Account" asp-action="Login" method="post" class="form-horizontal" role="form">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input type="hidden" asp-for="ReturnUrl" />
         <section class="grid-input">
             <h3>Logar com usuário</h3>
             <div>

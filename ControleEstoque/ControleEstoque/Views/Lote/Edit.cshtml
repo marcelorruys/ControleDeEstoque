@@ -18,13 +18,15 @@
                 <input asp-for="Referencia" class="form-control" />
                 <span asp-validation-for="Referencia" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group">
                 <label asp-for="FornecedorId" class="control-label"></label>
                 <select asp-for="FornecedorId" class="form-control" asp-items="ViewBag.FornecedorId"></select>
                 <span asp-validation-for="FornecedorId" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group">
-                <input type="submit" value="Save" class="btn " />
+                <input type="submit" value="Salvar" class="btn " />
             </div>
         </form>
     </div>
@@ -35,5 +37,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

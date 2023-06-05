@@ -18,75 +18,80 @@
                 <input asp-for="Nome" class="form-control" />
                 <span asp-validation-for="Nome" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group">
                 <label asp-for="RazaoSocial" class="control-label"></label>
                 <input asp-for="RazaoSocial" class="form-control" />
                 <span asp-validation-for="RazaoSocial" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group">
                 <label asp-for="Cnpj" class="control-label"></label>
                 <input asp-for="Cnpj" class="form-control" />
                 <span asp-validation-for="Cnpj" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group">
                 <label asp-for="Telefone" class="control-label"></label>
                 <input asp-for="Telefone" class="form-control" />
                 <span asp-validation-for="Telefone" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group">
                 <label asp-for="Endereco1" class="control-label"></label>
                 <input asp-for="Endereco1" class="form-control" />
                 <span asp-validation-for="Endereco1" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group">
                 <label asp-for="Endereco2" class="control-label"></label>
                 <input asp-for="Endereco2" class="form-control" />
                 <span asp-validation-for="Endereco2" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group">
                 <label asp-for="Cep" class="control-label"></label>
                 <input asp-for="Cep" class="form-control" />
                 <span asp-validation-for="Cep" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group">
                 <label asp-for="Estado" class="control-label"></label>
                 <input asp-for="Estado" class="form-control" />
                 <span asp-validation-for="Estado" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group">
                 <label asp-for="Cidade" class="control-label"></label>
                 <input asp-for="Cidade" class="form-control" />
                 <span asp-validation-for="Cidade" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group">
                 <label asp-for="DescricaoDetalhada" class="control-label"></label>
                 <input asp-for="DescricaoDetalhada" class="form-control" />
                 <span asp-validation-for="DescricaoDetalhada" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group">
-<<<<<<< HEAD
-                <input type="submit" value="Save" class="btn " />
-=======
-                <input type="submit" value="Salvar" class="btn btn-primary" />
->>>>>>> refs/remotes/origin/main
+                <input type="submit" value="Salvar" class="btn " />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-<<<<<<< HEAD
     <a class="btn " asp-action="Index">Voltar</a>
-=======
-    <a class="btn btn-success" asp-action="Index">Voltar</a>
->>>>>>> refs/remotes/origin/main
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

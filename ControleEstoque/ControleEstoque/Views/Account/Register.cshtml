@@ -21,7 +21,8 @@
         <div>
             <img src="~/images/user.png" class="img-fluid" alt="Usuario Imagem" />
         </div>
-        <form asp-controller="Account" asp-action="Login" method="post" class="form-horizontal" role="form">
+        <form asp-controller="Account" asp-action="Register" method="post" class="form-horizontal" role="form">
+            <div asp-validation-summary="All" class="text-danger"></div>
             <section class="grid-input">
                 <h3>Registrar usuário</h3>
                 <div>

@@ -21,19 +21,18 @@ public class Produto
     [MaxLength(200, ErrorMessage = "Descrição não pode exceder {1} caracteres")]
     public string DescricaoDetalhada { get; set; }
 
-    [Display(Name = "Link Imagem")]
-    [StringLength(200, ErrorMessage = "O {0} deve ter no máximo {1} caracteres")]
-    public string ImagemUrl { get; set; }
-
     [Display(Name = "Favorito")]
     public bool IsProdutoPreferido { get; set; }
 
+    [Required(ErrorMessage = "Campo obrigatório")]
     [Display(Name = "Estoque Mínimo")]
     public int EstoqueMinimo { get; set; }
 
+    [Required(ErrorMessage = "Campo obrigatório")]
     [Display(Name = "Estoque Máximo")]
     public int EstoqueMaximo { get; set; }
 
+    [Required(ErrorMessage = "Campo obrigatório")]
     [Display(Name = "Estoque Atual")]
     public int Estoque { get; set; }
 

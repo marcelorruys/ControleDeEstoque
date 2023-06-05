@@ -19,7 +19,6 @@ public class ProdutoController : Controller
         _context = context;
     }
 
-    // GET: Produto
     public IActionResult Index(string categoria)
     {
         IEnumerable<Produto> produtos;
@@ -48,7 +47,6 @@ public class ProdutoController : Controller
         return View(produtosListViewModel);
     }
 
-    // GET: Produto/Details/5
     public async Task<IActionResult> Details(int? id)
     {
         if (id == null || _context.Produto == null)
@@ -96,7 +94,6 @@ public class ProdutoController : Controller
         });
     }
 
-    // GET: Produto/Create
     public IActionResult Create()
     {
         ViewData["CategoriaId"] = new SelectList(_context.Categoria, "CategoriaId", "CategoriaNome");
@@ -104,9 +101,6 @@ public class ProdutoController : Controller
         return View();
     }
 
-    // POST: Produto/Create
-    // To protect from overposting attacks, enable the specific properties you want to bind to.
-    // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create([Bind("ProdutoId,Nome,DescricaoDetalhada,ImagemUrl,IsProdutoPreferido,EstoqueMinimo,EstoqueMaximo,Estoque,CategoriaId,LoteId")] Produto produto)
@@ -122,7 +116,6 @@ public class ProdutoController : Controller
         return View(produto);
     }
 
-    // GET: Produto/Edit/5
     public async Task<IActionResult> Edit(int? id)
     {
         if (id == null || _context.Produto == null)
@@ -140,9 +133,6 @@ public class ProdutoController : Controller
         return View(produto);
     }
 
-    // POST: Produto/Edit/5
-    // To protect from overposting attacks, enable the specific properties you want to bind to.
-    // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(int id, [Bind("ProdutoId,Nome,DescricaoDetalhada,ImagemUrl,IsProdutoPreferido,EstoqueMinimo,EstoqueMaximo,Estoque,CategoriaId,LoteId")] Produto produto)
@@ -173,7 +163,6 @@ public class ProdutoController : Controller
         return View(produto);
     }
 
-    // GET: Produto/Delete/5
     public async Task<IActionResult> Delete(int? id)
     {
         if (id == null || _context.Produto == null)
@@ -193,7 +182,6 @@ public class ProdutoController : Controller
         return View(produto);
     }
 
-    // POST: Produto/Delete/5
     [HttpPost, ActionName("Delete")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteConfirmed(int id)
@@ -207,14 +195,14 @@ public class ProdutoController : Controller
         {
             _context.Produto.Remove(produto);
         }
-        
+
         await _context.SaveChangesAsync();
         return RedirectToAction(nameof(Index));
     }
 
     private bool ProdutoExists(int id)
     {
-      return _context.Produto.Any(e => e.ProdutoId == id);
+        return _context.Produto.Any(e => e.ProdutoId == id);
     }
 
     public IActionResult Error(string message)
