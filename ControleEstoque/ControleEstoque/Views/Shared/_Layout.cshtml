@@ -16,11 +16,11 @@
                 <a class="btn" asp-area="" asp-controller="Produto" asp-action="Index">
                     Home
                 </a>
-                @await Component.InvokeAsync("CategoriaMenu")
+                <a class="nav-link text-light" asp-area="" asp-controller="Produto" asp-action="Index">Produto</a>
+                @*@await Component.InvokeAsync("CategoriaMenu")*@
                 <a class="btn  " asp-area="" asp-controller="Categoria" asp-action="Index">Categoria</a>
                 <a class="btn  " asp-area="" asp-controller="Lote" asp-action="Index">Lote</a>
                 <a class="btn  " asp-area="" asp-controller="Fornecedor" asp-action="Index">Fornecedor</a>
-                @*<a class="nav-link text-light" asp-area="" asp-controller="Produto" asp-action="List">Produtos</a>*@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -35,7 +35,7 @@
                         </div>
                     </form>
                     @await Html.PartialAsync("_LoginPartial")
-                    @*<a class="nav-link text-light" asp-area="" asp-controller="Produto" asp-action="List">Produtos</a>*@
+                    
                 </div>
             </div>
         </nav>

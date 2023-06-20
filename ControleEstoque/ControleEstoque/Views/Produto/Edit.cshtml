@@ -13,63 +13,72 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ProdutoId" />
-            <div class="form-group">
-                <label asp-for="Nome" class="control-label"></label>
-                <input asp-for="Nome" class="form-control" />
+            <div class="form-group ">
+                <label class="control-label"> Nome do produto</label>
+            </div>
+            <div>
+                <input asp-for="Nome" class="form-control " />
                 <span asp-validation-for="Nome" class="text-danger"></span>
             </div>
             <br />
-            <div class="form-group">
+            <div class="form-group ">
                 <label asp-for="DescricaoDetalhada" class="control-label"></label>
-                <input asp-for="DescricaoDetalhada" class="form-control" />
+            </div>
+            <div>
+                <input asp-for="DescricaoDetalhada" class="form-control " />
                 <span asp-validation-for="DescricaoDetalhada" class="text-danger"></span>
             </div>
             <br />
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsProdutoPreferido" /> @Html.DisplayNameFor(model => model.IsProdutoPreferido)
+                    <input class="form-check-input " asp-for="IsProdutoPreferido" /> @Html.DisplayNameFor(model => model.IsProdutoPreferido)
                 </label>
             </div>
             <br />
-            <div class="form-group">
+            <div class="form-group ">
                 <label asp-for="EstoqueMinimo" class="control-label"></label>
-                <input asp-for="EstoqueMinimo" class="form-control" />
+            </div>
+            <div>
+                <input asp-for="EstoqueMinimo" class="form-control " />
                 <span asp-validation-for="EstoqueMinimo" class="text-danger"></span>
             </div>
             <br />
-            <div class="form-group">
+            <div class="form-group ">
                 <label asp-for="EstoqueMaximo" class="control-label"></label>
-                <input asp-for="EstoqueMaximo" class="form-control" />
+            </div>
+            <div>
+                <input asp-for="EstoqueMaximo" class="form-control " />
                 <span asp-validation-for="EstoqueMaximo" class="text-danger"></span>
             </div>
             <br />
-            <div class="form-group">
+            <div class="form-group ">
                 <label asp-for="Estoque" class="control-label"></label>
-                <input asp-for="Estoque" class="form-control" />
+            </div>
+            <div>
+                <input asp-for="Estoque" class="form-control " />
                 <span asp-validation-for="Estoque" class="text-danger"></span>
             </div>
             <br />
-            <div class="form-group">
+            <div class="form-group ">
                 <label asp-for="CategoriaId" class="control-label"></label>
-                <select asp-for="CategoriaId" class="form-control" asp-items="ViewBag.CategoriaId"></select>
-                <span asp-validation-for="CategoriaId" class="text-danger"></span>
+            </div>
+            <div>
+                <select asp-for="CategoriaId" class="form-control " asp-items="ViewBag.CategoriaId"></select>
             </div>
             <br />
-            <div class="form-group">
+            <div class="form-group ">
                 <label asp-for="LoteId" class="control-label"></label>
-                <select asp-for="LoteId" class="form-control" asp-items="ViewBag.LoteId"></select>
-                <span asp-validation-for="LoteId" class="text-danger"></span>
+            </div>
+            <div>
+                <select asp-for="LoteId" class="form-control " asp-items="ViewBag.LoteId"></select>
             </div>
             <br />
             <div class="form-group">
-                <input type="submit" value="Salvar" asp-route="ProdutoId" class="btn" />
+                <input type="submit" value="Salvar" asp-route="ProdutoId" class="btn" /> |
+                <a class="btn " asp-action="Index">Voltar</a>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a class="btn " asp-action="Index">Voltar</a>
 </div>
 
 @section Scripts {

@@ -14,26 +14,26 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="LoteId" />
             <div class="form-group">
-                <label asp-for="Referencia" class="control-label"></label>
+                <label asp-for="Referencia" class="control-label"> </label>
+            </div>
+            <div>
                 <input asp-for="Referencia" class="form-control" />
                 <span asp-validation-for="Referencia" class="text-danger"></span>
             </div>
             <br />
             <div class="form-group">
-                <label asp-for="FornecedorId" class="control-label"></label>
+                <label class="control-label">Fornecedor </label>
+            </div>
+            <div>
                 <select asp-for="FornecedorId" class="form-control" asp-items="ViewBag.FornecedorId"></select>
-                <span asp-validation-for="FornecedorId" class="text-danger"></span>
             </div>
             <br />
             <div class="form-group">
-                <input type="submit" value="Salvar" class="btn " />
+                <input type="submit" value="Salvar" class="btn " /> |
+                <a class="btn " asp-action="Index">Voltar</a>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a class="btn " asp-action="Index">Voltar</a>
 </div>
 
 @section Scripts {

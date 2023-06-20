@@ -14,24 +14,25 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Referencia" class="control-label"> </label>
+            </div>
+            <div>
                 <input asp-for="Referencia" class="form-control" />
                 <span asp-validation-for="Referencia" class="text-danger"></span>
             </div>
             <br />
             <div class="form-group">
                 <label class="control-label">Fornecedor </label>
+            </div>
+            <div>
                 <select asp-for="FornecedorId" class="form-control" asp-items="ViewBag.FornecedorId"></select>
             </div>
             <br />
             <div class="form-group">
-                <input type="submit" value="Criar" class="btn" />
+                <input type="submit" value="Criar" class="btn" /> |
+                <a class="btn " asp-action="Index">Voltar</a>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a class="btn " asp-action="Index">Voltar</a>
 </div>
 
 @section Scripts {

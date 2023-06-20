@@ -15,25 +15,30 @@
             <input type="hidden" asp-for="CategoriaId" />
             <div class="form-group">
                 <label asp-for="CategoriaNome" class="control-label"></label>
+            </div>
+            <div>
                 <input asp-for="CategoriaNome" class="form-control" />
                 <span asp-validation-for="CategoriaNome" class="text-danger"></span>
             </div>
             <br />
             <div class="form-group">
                 <label asp-for="Descricao" class="control-label"></label>
+            </div>
+            <div>
                 <input asp-for="Descricao" class="form-control" />
                 <span asp-validation-for="Descricao" class="text-danger"></span>
             </div>
             <br />
             <div class="form-group">
-                <input type="submit" value="Salvar" class="btn btn-primary" />
+                <input type="submit" value="Salvar" class="btn btn-primary" /> |
+                <a class="btn " asp-action="Index">Voltar</a>
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a class="btn " asp-action="Index">Voltar</a>
+    
 </div>
 
 @section Scripts {
